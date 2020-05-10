@@ -18,4 +18,6 @@ class SetPlayer(Resource):
 class GetPlayers(Resource):
     @staticmethod
     def get():
-        return player_list
+        resp = Response(player_list)
+        resp.headers['Access-Control-Allow-Origin'] = '*'
+        return resp

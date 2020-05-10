@@ -23,7 +23,7 @@ api.add_resource(SetPlayer, "/players/set")
 api.add_resource(GetPlayers, "/players/all")
 
 
-app.run(host='0.0.0.0', debug=False, port=8080)
+app.run(host='0.0.0.0', debug=False, port=8888)
 
 
 # if __name__ == '__main__':

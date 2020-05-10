@@ -102,7 +102,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/app_resources/game_handler.py</url>
-          <line>18</line>
+          <line>19</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -112,7 +112,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/app_resources/game_handler.py</url>
-          <line>44</line>
+          <line>43</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>

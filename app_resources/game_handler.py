@@ -1,8 +1,9 @@
-from flask import request, Response
+from flask import request, Response, jsonify
 from flask_restful import Resource
 from app_resources.song_broker import *
 from app_resources.game_broker import Game, Round
 import time
+
 
 SB = SongBroker()
 current_game = Game()
@@ -29,13 +30,11 @@ class SubmitAnswer(Resource):
                     current_round.user_scores[user_id] = submission_time - timestamp
                 else:
                     current_round.user_scores[user_id] = 0
-                resp = Response(outcome)
+                return outcome, 200
             else:
-                resp = Response("Answer was too late")
+                return "Answer was too late", 400
         else:
-            resp = Response("Answer is not for the current round")
-        resp.headers['Access-Control-Allow-Origin'] = '*'
-        return resp
+            return "Answer is not for the current round", 400
 
 
 class NewRound(Resource):
@@ -44,18 +43,14 @@ class NewRound(Resource):
         json = request.get_json(force=True)
         song_id = SB.set_song(json['song'])
         current_round.new_round(get_timestamp(), song_id)
-        resp = Response("Song set")
-        resp.headers['Access-Control-Allow-Origin'] = '*'
-        return resp
+        return "Song set"
 
 
 class CurrentRound(Resource):
     @staticmethod
     def get():
         song_id = current_round.song_id if '?' not in current_round.song_id else current_round.song_id.split('?')[0]
-        resp = Response({'songId': song_id, 'timestamp': current_round.timestamp})
-        resp.headers['Access-Control-Allow-Origin'] = '*'
-        return resp
+        return {'songId': song_id, 'timestamp': current_round.timestamp}
 
 
 class RoundSummary(Resource):
@@ -65,14 +60,10 @@ class RoundSummary(Resource):
         is_complete = current_round.is_round_complete(request_time)
         if is_complete:
             current_round.write_round_data(current_game)
-        resp = Response({'complete': is_complete, 'summary': current_round.user_scores})
-        resp.headers['Access-Control-Allow-Origin'] = '*'
-        return resp
+        return {'complete': is_complete, 'summary': current_round.user_scores}
 
 
 class Leaderboard(Resource):
     @staticmethod
     def get():
-        resp = Response(current_game.get_scores())
-        resp.headers['Access-Control-Allow-Origin'] = '*'
-        return resp
+        return current_game.get_scores()

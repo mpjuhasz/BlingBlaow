@@ -22,6 +22,10 @@ api.add_resource(Leaderboard, "/leaderboard")
 api.add_resource(SetPlayer, "/players/set")
 api.add_resource(GetPlayers, "/players/all")
 
+@app.after_request
+def apply_cors(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response
 
 app.run(host='0.0.0.0', debug=False, port=8888)
 

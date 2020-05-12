@@ -1,4 +1,4 @@
-from app_resources.player_handler import player_list
+from app_resources.player_handler import players
 
 
 class Game:
@@ -7,7 +7,7 @@ class Game:
 
     def get_scores(self):
         leaderboard = list()
-        for player in player_list:
+        for player in players.player_list:
             player_score = 0
             for round_id in self.round_data.keys():
                 if player in self.round_data[round_id].keys():
@@ -48,7 +48,7 @@ class Round:
     def new_round(self, timestamp, song_id):
         self.song_id = song_id
         self.timestamp = timestamp
-        self.users = player_list
+        self.users = players.player_list
         self.num_answers = 0
         self.user_scores = dict()
 

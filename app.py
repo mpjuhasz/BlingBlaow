@@ -20,7 +20,8 @@ api.add_resource(CurrentRound, "/game/currentRound")
 api.add_resource(RoundSummary, "/game/roundSummary")
 api.add_resource(Leaderboard, "/leaderboard")
 api.add_resource(SetPlayer, "/players/set")
-api.add_resource(GetPlayers, "/players/all")
+api.add_resource(Players, "/players/all")
+
 
 @app.after_request
 def apply_cors(response):

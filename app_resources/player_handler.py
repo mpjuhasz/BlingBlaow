@@ -1,18 +1,23 @@
 from flask import request, Response, jsonify
 from flask_restful import Resource
 
-class playersClass:
+
+class Playersclass:
     def __init__(self):
         self.player_list = list()
 
     def set(self, player):
-        self.player_list.append(player)
+        if player not in self.player_list:
+            self.player_list.append(player)
+            return 'Player set', 200
+        else:
+            return 'ERROR: name already in use', 400
 
     def clear(self):
         self.player_list = list()
 
 
-players = playersClass()
+players = Playersclass()
 
 
 class SetPlayer(Resource):
@@ -20,8 +25,8 @@ class SetPlayer(Resource):
     def post():
         json = request.get_json(force=True)
         user_id = json['userName']
-        players.set(user_id)
-        return 'User set'
+        message, code = players.set(user_id)
+        return message, code
 
 
 class Players(Resource):

@@ -67,3 +67,11 @@ class Leaderboard(Resource):
     @staticmethod
     def get():
         return current_game.get_scores()
+
+
+class ClearGame(Resource):
+    @staticmethod
+    def delete():
+        current_game.clear_game()
+        return 'Game cleared', 200
+

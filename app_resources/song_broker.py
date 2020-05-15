@@ -5,7 +5,7 @@ from app_resources.resources import contractions
 
 url = 'https://api.spotify.com/v1/tracks/'
 stemmer = SnowballStemmer('english')
-auth_token = 'BQCVt8_7SkdVad0aWuRBTqB9CeOuyym9SDhcjABAEElGQz_ffZ7_InmG5lhEkSRJTn83OnTyqZDv9566DlcNgxuyVR6NtoTYfoyiN2OijYTkgSzkmH3U9UxaPgZU6RyFVElb83LOjRVHVO1KJXoeKutXZeFBx_gezQ60pi88QTw4I_we3UrKeKc'
+auth_token = 'BQBKnNwd5r_EFZHbqQMXzd7xK3_dA3WIDSZLF2HLn4r5EDwRhiwLs8fcf4DdsMEGI5mkwIsKR_3Y9qqBEmo_JC9-bV9ACnUzoIi3WN8brCcyZbLvfh2ZqiUc51OVTXtmqcCqg1VyIUds1i6KKcsyr-H4kVQuwQWYAeHVPmQpxVIGkXJIrOh2nqQ'
 
 
 def song_dealer(spotify_url):

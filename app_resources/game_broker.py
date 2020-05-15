@@ -19,6 +19,9 @@ class Game:
 
         return sorted_leaderboard
 
+    def clear_game(self):
+        self.round_data = dict()
+
 
 class Round:
     def __init__(self):

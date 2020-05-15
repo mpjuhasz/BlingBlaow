@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body {
+  background-color: #2196F3;
+  font-family: 'Roboto', sans-serif;
+  color: #fff;
+}
+
+.form-container {
+  position: relative;
+  max-width: 700px;
+  margin: 150px auto 0;
+  text-align: center;
+}
+
+.form-container input {
+  border: 0;
+  border-bottom: 2px solid #1976D2;
+  width: 100%;
+  font-size: 30px;
+  line-height: 35px;
+  height: 70px;
+  text-align: center;
+  padding: 10px;
+  background: transparent;
+  color: #BBDEFB;
+}
+
+.form-container input:focus {
+  outline: 0;
+  color: #BBDEFB;
+}
+
+.form-container input::placeholder {
+  color: #1976D2;
+}
+
+.form-container button {
+  box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.25);
+  padding: 10px 5px;
+  display: inline-block;
+  margin: 20px auto 0 auto;
+  border-radius: 30px;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  background-color: transparent;
+  border-color: transparent;
+  width: 250px;
+  color: #BBDEFB;
+}
+
+#answer-submitted {
+  font-size: 30px;
+}
+
+#waiting-room {
+  text-align: center;
+  font-size: 50px;
+}
+
+#countdown {
+  text-align: center;
+  font-size: 75px;
+}

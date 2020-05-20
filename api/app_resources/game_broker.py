@@ -4,6 +4,7 @@ from app_resources.player_handler import players
 class Game:
     def __init__(self):
         self.round_data = dict()
+        self.game_mode = 'title'
 
     def get_scores(self):
         leaderboard = list()

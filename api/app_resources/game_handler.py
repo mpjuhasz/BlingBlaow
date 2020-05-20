@@ -2,6 +2,7 @@ from flask import request, Response, jsonify
 from flask_restful import Resource
 from app_resources.song_broker import *
 from app_resources.game_broker import Game, Round
+from app_resources.resources import game_modes
 import time
 
 
@@ -14,6 +15,18 @@ def get_timestamp():
     return int(round(time.time()*1000))
 
 
+class SetGameMode(Resource):
+    @staticmethod
+    def post():
+        json = request.get_json(force=True)
+        game_mode = json['gameMode']
+        if game_mode in game_modes:
+            Game.game_mode = game_mode
+            return 'Game mode set', 200
+        else:
+            return 'Incorrect game mode', 400
+
+
 class SubmitAnswer(Resource):
     @staticmethod
     def post():
@@ -24,7 +37,7 @@ class SubmitAnswer(Resource):
         timestamp = json['timestamp']
         if current_round.is_correct_round(timestamp):
             if current_round.acceptable_answer(submission_time):
-                outcome = SB(user_id, answer)
+                outcome = SB(user_id, answer, Game.game_mode)
                 current_round.num_answers += 1
                 if outcome:
                     current_round.user_scores[user_id] = submission_time - timestamp

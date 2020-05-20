@@ -1,3 +1,5 @@
+game_modes = {'title', 'year'}
+
 contractions = {
     # "ain't": "am not / are not / is not / has not / have not",
     "aren't": "are not",

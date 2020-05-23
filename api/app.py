@@ -2,6 +2,7 @@ from flask import Flask, request
 from flask_restful import Api, Resource
 from app_resources.game_handler import *
 from app_resources.player_handler import *
+import argparse
 
 app = Flask('BlingBlaow')
 api = Api(app)
@@ -30,7 +31,13 @@ def apply_cors(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
-app.run(host='0.0.0.0', debug=False, port=8888)
+parser = argparse.ArgumentParser(description='Process some integers.')
+parser.add_argument('--prod', action='store_true')
+
+if parser.parse_args().prod:
+    app.run(host='0.0.0.0', debug=False, port=8888, ssl_context=('/root/www/certificate.pem', '/root/www/key.pem'))
+else:
+    app.run(host='0.0.0.0', debug=False, port=8888)
 
 
 # if __name__ == '__main__':

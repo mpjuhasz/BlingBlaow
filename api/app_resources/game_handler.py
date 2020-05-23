@@ -90,3 +90,8 @@ class ClearGame(Resource):
         current_game.clear_game()
         return 'Game cleared', 200
 
+
+class CorrectAnswer(Resource):
+    @staticmethod
+    def get():
+        return SB.correct_answer, 200

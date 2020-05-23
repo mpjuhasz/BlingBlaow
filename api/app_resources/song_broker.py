@@ -54,3 +54,6 @@ class SongBroker:
         self.correct_answer = correct_answer
         # self.current_song, self.current_song_year = song_dealer(song_url)
         return song_url.split('/')[-1]
+
+    def get_answer(self):
+        return self.correct_answer

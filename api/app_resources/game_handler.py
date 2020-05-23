@@ -1,8 +1,8 @@
 from flask import request, Response, jsonify
 from flask_restful import Resource
-from app_resources.song_broker import *
-from app_resources.game_broker import Game, Round
-from app_resources.resources import game_modes
+from .song_broker import *
+from .game_broker import Game, Round
+from .resources import game_modes
 import time
 
 
@@ -37,7 +37,7 @@ class SubmitAnswer(Resource):
         timestamp = json['timestamp']
         if current_round.is_correct_round(timestamp):
             if current_round.acceptable_answer(submission_time):
-                outcome = SB(user_id, answer, Game.game_mode)
+                outcome = SB(user_id, answer, current_game.game_mode)
                 current_round.num_answers += 1
                 if outcome:
                     current_round.user_scores[user_id] = submission_time - timestamp
@@ -54,7 +54,7 @@ class NewRound(Resource):
     @staticmethod
     def post():
         json = request.get_json(force=True)
-        song_id = SB.set_song(json['song'])
+        song_id = SB.set_song(json['song'], json['correctAnswer'])
         current_round.new_round(get_timestamp(), song_id)
         return "Song set"
 

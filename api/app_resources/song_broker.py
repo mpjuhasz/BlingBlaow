@@ -1,6 +1,6 @@
 import requests
 from nltk.stem.snowball import SnowballStemmer
-from app_resources.resources import contractions
+from .resources import contractions
 
 
 url = 'https://api.spotify.com/v1/tracks/'
@@ -21,8 +21,8 @@ def preprocess(song_string):
     stemmed_song = str(stemmer.stem(song_string)).lower()
     if '(feat' in stemmed_song:
         stemmed_song = stemmed_song[:stemmed_song.find('(feat')-1]
-    if '- remastered' in stemmed_song:
-        stemmed_song = stemmed_song[:stemmed_song.find('- remastered')-1]
+    if ' - ' in stemmed_song:
+        stemmed_song = stemmed_song[:stemmed_song.find(' - ')-1]
     processed_song = ''
     for word in stemmed_song.split():
         if word in contractions.keys():
@@ -39,16 +39,18 @@ class SongBroker:
         self.url = ''
         self.current_song = ''
         self.current_song_year = ''
+        self.correct_answer = ''
 
     def __call__(self, user_id, user_answer, game_mode):
         if game_mode == 'title':
-            return preprocess(user_answer) == preprocess(self.current_song)
+            return preprocess(user_answer) == preprocess(self.correct_answer)
         elif game_mode == 'year':
             return user_answer == self.current_song_year
         else:
             return 'Wrong game mode', 400
 
-    def set_song(self, song_url):
+    def set_song(self, song_url, correct_answer):
         self.url = song_url
-        self.current_song, self.current_song_year = song_dealer(song_url)
+        self.correct_answer = correct_answer
+        # self.current_song, self.current_song_year = song_dealer(song_url)
         return song_url.split('/')[-1]

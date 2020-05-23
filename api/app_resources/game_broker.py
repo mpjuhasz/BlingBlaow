@@ -1,4 +1,4 @@
-from app_resources.player_handler import players
+from .player_handler import players
 
 
 class Game:

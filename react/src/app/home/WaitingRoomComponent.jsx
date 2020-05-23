@@ -9,10 +9,9 @@ class WaitingRoomComponent extends React.Component {
     }
 
     componentDidMount() {
-        console.log("Mount");
         this.timerID = setInterval(
             () => this.pollRound(),
-            500
+            1000
         );
     }
 
@@ -22,12 +21,12 @@ class WaitingRoomComponent extends React.Component {
 
     pollRound() {
         this.props.pollRound();
-        this.props.pollRoundSummary();
+        //this.props.pollRoundSummary();
     }
 
     render() {
         let text = 'Waiting for other players...';
-        if (!this.props.guessSubmitted) {
+        if (this.props.guessSubmitted) {
             text = 'Waiting for next round to start...';
         }
         return (
@@ -41,7 +40,8 @@ class WaitingRoomComponent extends React.Component {
 WaitingRoomComponent.propTypes = {
     guessSubmitted: PropTypes.bool.isRequired,
     pollRound: PropTypes.func.isRequired,
-    pollRoundSummary: PropTypes.func.isRequired
+    pollRoundSummary: PropTypes.func.isRequired,
+    pollLeaderboard: PropTypes.func.isRequired,
 };
 
 export default WaitingRoomComponent;

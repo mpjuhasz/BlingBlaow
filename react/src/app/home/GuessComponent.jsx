@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import GuessSubmitComponent from "./GuessSubmitContainer";
 import CountdownComponent from "./CountdownContainer";
 
 class GuessComponent extends React.Component {
@@ -8,6 +7,7 @@ class GuessComponent extends React.Component {
         super(props);
 
         this.changeGuess = this.changeGuess.bind(this);
+        this.onKeyDown = this.onKeyDown.bind(this);
         window.play('spotify:track:' + this.props.songId);
     }
 
@@ -15,14 +15,28 @@ class GuessComponent extends React.Component {
         this.props.changeGuess(value);
     }
 
+    onKeyDown(event) {
+        // 'keypress' event misbehaves on mobile so we track 'Enter' key via 'keydown' event
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            event.stopPropagation();
+            this.props.submitGuess(this.props.nickname, this.props.guess, this.props.timestamp);
+        }
+    }
+
     render() {
         return (
             <div id="guess-container" className="form-container">
                 <CountdownComponent />
                 <input onChange={(e) => this.changeGuess(e.target.value)}
+                       onKeyDown={this.onKeyDown}
                        value={this.props.guess}
                        type="text" name="guess" placeholder="What's your guess?" autoComplete="off" />
-                <GuessSubmitComponent disabled={this.props.guess.length === 0} />
+                <div id="guess-submit-container">
+                    <button type="button" className="submit-guess" onClick={this.submitGuess} disabled={this.props.guess.length === 0}>
+                        Submit My Guess!
+                    </button>
+                </div>
             </div>
         );
     }

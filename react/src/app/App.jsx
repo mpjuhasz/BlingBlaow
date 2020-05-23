@@ -6,6 +6,7 @@ import InitializerComponent from "./home/InitializerContainer";
 import { connect } from "react-redux";
 import {getConfirmedNickname, getGuessTimestamp, getRound, isGuessSubmitted} from "./home/duck/selectors";
 import WaitingRoomComponent from "./home/WaitingRoomContainer";
+import LeaderboardComponent from "./home/LeaderboardContainer";
 
 function App(props) {
     let component = <InitializerComponent />;
@@ -18,6 +19,7 @@ function App(props) {
     return (
         <div>
             { component }
+            <LeaderboardComponent />
         </div>
     );
 }

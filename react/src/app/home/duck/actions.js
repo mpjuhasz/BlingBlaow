@@ -5,10 +5,10 @@ import {
     CHANGE_TOKEN,
     CHANGE_NICKNAME,
     SUBMIT_NICKNAME,
-    NEW_ROUND, COUNTDOWN, CLEAR_ROUND
+    NEW_ROUND, COUNTDOWN, CLEAR_ROUND, UPDATE_LEADERBOARD
 } from './types';
 
-const baseUrl = "http://192.168.1.18:8888"
+const baseUrl = "https://blingblaow.com:8888"
 
 export const changeGuess = (guess) => ({
     type: CHANGE_GUESS,
@@ -82,6 +82,11 @@ export const clearRound = () => {
     }
 }
 
+export const updateLeaderboard = (leaderboard) => ({
+    type: UPDATE_LEADERBOARD,
+    payload: {leaderboard}
+})
+
 export const submitNickname = (nickname) => {
     return (dispatch) => {
         var request = new XMLHttpRequest()
@@ -134,6 +139,25 @@ export const pollRoundSummary = () => {
 
             if (request.status === 200 && summary.complete) {
                 return dispatch(clearRound());
+            } else {
+                console.log('error')
+            }
+        }
+
+        request.send();
+    }
+}
+
+export const pollLeaderboard = () => {
+    return (dispatch) => {
+        var request = new XMLHttpRequest()
+
+        request.open('GET', baseUrl + '/leaderboard', true)
+        request.onload = function() {
+            const lb = JSON.parse(this.response);
+
+            if (request.status === 200) {
+                return dispatch(updateLeaderboard(lb));
             } else {
                 console.log('error')
             }

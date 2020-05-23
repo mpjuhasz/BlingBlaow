@@ -7,3 +7,4 @@ export const SUBMIT_NICKNAME = 'SUBMIT_NICKNAME';
 export const NEW_ROUND = 'NEW_ROUND';
 export const COUNTDOWN = 'COUNTDOWN';
 export const CLEAR_ROUND = 'CLEAR_ROUND';
+export const UPDATE_LEADERBOARD = 'UPDATE_LEADERBOARD';

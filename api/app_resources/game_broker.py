@@ -57,4 +57,5 @@ class Round:
         self.user_scores = dict()
 
     def write_round_data(self, game):
-        game.round_data[self.timestamp] = self.user_scores
+        if self.timestamp not in game.round_data.keys():
+            game.round_data[self.timestamp] = self.user_scores

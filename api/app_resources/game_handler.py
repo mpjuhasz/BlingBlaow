@@ -62,6 +62,10 @@ class NewRound(Resource):
 class CurrentRound(Resource):
     @staticmethod
     def get():
+        request_time = get_timestamp()
+        is_complete = current_round.is_round_complete(request_time)
+        if is_complete:
+            current_round.write_round_data(current_game)
         song_id = current_round.song_id if '?' not in current_round.song_id else current_round.song_id.split('?')[0]
         return {'songId': song_id, 'timestamp': current_round.timestamp}
 
@@ -71,8 +75,6 @@ class RoundSummary(Resource):
     def get():
         request_time = get_timestamp()
         is_complete = current_round.is_round_complete(request_time)
-        if is_complete:
-            current_round.write_round_data(current_game)
         return {'complete': is_complete, 'summary': current_round.user_scores}
 
 

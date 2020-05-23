@@ -19,3 +19,5 @@ export const getSongId = (store) => store.blingBlaow.round.songId;
 export const getTimestamp = (store) => store.blingBlaow.round.timestamp;
 
 export const getGuessTimestamp = (store) => store.blingBlaow.guessTimestamp;
+
+export const getLeaderboard = (store) => store.blingBlaow.leaderboard;

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import {pollRound, pollRoundSummary} from './duck/actions';
+import {pollLeaderboard, pollRound, pollRoundSummary} from './duck/actions';
 import WaitingRoomComponent from "./WaitingRoomComponent";
 import { isGuessSubmitted } from "./duck/selectors";
 
@@ -9,5 +9,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(
     mapStateToProps,
-    { pollRound, pollRoundSummary },
+    { pollRound, pollRoundSummary, pollLeaderboard },
 )(WaitingRoomComponent);

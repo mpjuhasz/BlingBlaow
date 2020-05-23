@@ -6,7 +6,7 @@ import {
     CHANGE_NICKNAME,
     SUBMIT_NICKNAME,
     NEW_ROUND,
-    COUNTDOWN, CLEAR_ROUND
+    COUNTDOWN, CLEAR_ROUND, UPDATE_LEADERBOARD
 } from './types';
 
 const initialState = {
@@ -15,7 +15,8 @@ const initialState = {
     guessSubmitted: false,
     token: '',
     nickname: '',
-    timeRemaining: 60
+    timeRemaining: 60,
+    leaderboard: []
 };
 
 export default function (state = initialState, action) {
@@ -87,6 +88,13 @@ export default function (state = initialState, action) {
                 guess: '',
                 guessSubmitted: false,
                 timeRemaining: 60
+            }
+        }
+        case UPDATE_LEADERBOARD: {
+            const { leaderboard } = action.payload;
+            return {
+                ...state,
+                leaderboard
             }
         }
         default:

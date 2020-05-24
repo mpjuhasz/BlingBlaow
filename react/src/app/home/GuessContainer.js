@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import GuessComponent from './GuessComponent.jsx';
 import {getGuess, isGuessSubmitted, getSongId, getTimestamp, getNickname} from './duck/selectors';
-import {changeGuess, submitGuess} from './duck/actions';
+import {changeGuess, clearGuess, submitGuess} from './duck/actions';
 
 const mapStateToProps = (state) => ({
     guess: getGuess(state),
@@ -13,5 +13,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(
     mapStateToProps,
-    { changeGuess, submitGuess },
+    { changeGuess, submitGuess, clearGuess },
 )(GuessComponent);

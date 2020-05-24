@@ -29,9 +29,14 @@ class WaitingRoomComponent extends React.Component {
         if (this.props.guessSubmitted) {
             text = 'Waiting for next round to start...';
         }
+        let subtext = '';
+        if (this.props.correctAnswer) {
+            subtext = 'Your guess: ' + this.props.guess + '. Correct answer: ' + this.props.correctAnswer;
+        }
         return (
             <div id="waiting-room">
-                <span>{text}</span>
+                <p id='waiting-text'>{text}</p>
+                <p id='correct-answer'>{subtext}</p>
             </div>
         );
     }

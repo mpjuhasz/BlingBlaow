@@ -22,22 +22,21 @@ export const submittedGuess = (timestamp) => {
     }
 }
 
-export const submitGuess = (nickname, guess, timestamp) => {
-    if (window.player) {
-        window.player.pause();
-    }
+export const clearGuess = () => ({
+    type: CLEAR_GUESS
+})
 
+export const submitGuess = (nickname, guess, timestamp) => {
     return (dispatch) => {
         var request = new XMLHttpRequest()
 
         request.open('POST', baseUrl + '/game/submitAnswer', true)
         request.onload = function() {
-            console.log(this.response)
-
+            dispatch(submittedGuess(timestamp));
             if (request.status === 200) {
-                return dispatch(submittedGuess(timestamp));
+                console.log('submitted answer');
             } else {
-                console.log('error')
+                console.log('error');
             }
         }
 
@@ -46,10 +45,6 @@ export const submitGuess = (nickname, guess, timestamp) => {
 
     }
 }
-
-export const clearGuess = () => ({
-    type: CLEAR_GUESS
-})
 
 export const changeToken = (token) => ({
     type: CHANGE_TOKEN,

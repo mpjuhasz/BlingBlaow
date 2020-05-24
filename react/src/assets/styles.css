@@ -56,7 +56,14 @@ body {
 
 #waiting-room {
   text-align: center;
+}
+
+#waiting-text {
   font-size: 50px;
+}
+
+#correct-answer {
+  font-size: 25px;
 }
 
 #countdown {

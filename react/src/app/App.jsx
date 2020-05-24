@@ -13,7 +13,7 @@ function App(props) {
     if (props.confirmedNickname.length > 0) {
         component = <WaitingRoomComponent />;
     }
-    if (props.round != null && !props.guessSubmitted && props.guessTimestamp !== props.round.timestamp && props.round.songId.length > 0) {
+    if (props.round != null && props.guessTimestamp !== props.round.timestamp && props.round.songId.length > 0) {
         component = <GuessComponent />;
     }
     return (

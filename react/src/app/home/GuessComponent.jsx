@@ -8,7 +8,12 @@ class GuessComponent extends React.Component {
 
         this.changeGuess = this.changeGuess.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
+        this.submitGuess = this.submitGuess.bind(this);
         window.play('spotify:track:' + this.props.songId);
+    }
+
+    componentDidMount() {
+        this.props.clearGuess();
     }
 
     changeGuess(value) {
@@ -20,8 +25,12 @@ class GuessComponent extends React.Component {
         if (event.key === 'Enter') {
             event.preventDefault();
             event.stopPropagation();
-            this.props.submitGuess(this.props.nickname, this.props.guess, this.props.timestamp);
+            this.submitGuess();
         }
+    }
+
+    submitGuess() {
+        this.props.submitGuess(this.props.nickname, this.props.guess, this.props.timestamp);
     }
 
     render() {
@@ -31,7 +40,7 @@ class GuessComponent extends React.Component {
                 <input onChange={(e) => this.changeGuess(e.target.value)}
                        onKeyDown={this.onKeyDown}
                        value={this.props.guess}
-                       type="text" name="guess" placeholder="What's your guess?" autoComplete="off" />
+                       type="text" name="guess" placeholder="What's your guess?" autoComplete="off" autoFocus />
                 <div id="guess-submit-container">
                     <button type="button" className="submit-guess" onClick={this.submitGuess} disabled={this.props.guess.length === 0}>
                         Submit My Guess!

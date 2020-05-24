@@ -21,3 +21,5 @@ export const getTimestamp = (store) => store.blingBlaow.round.timestamp;
 export const getGuessTimestamp = (store) => store.blingBlaow.guessTimestamp;
 
 export const getLeaderboard = (store) => store.blingBlaow.leaderboard;
+
+export const getCorrectAnswer = (store) => store.blingBlaow.round.correctAnswer;

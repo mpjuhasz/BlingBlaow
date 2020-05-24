@@ -16,7 +16,8 @@ const initialState = {
     token: '',
     nickname: '',
     timeRemaining: 60,
-    leaderboard: []
+    leaderboard: [],
+    round: {}
 };
 
 export default function (state = initialState, action) {
@@ -40,8 +41,8 @@ export default function (state = initialState, action) {
         case CLEAR_GUESS: {
             return {
                 ...state,
-                guess: null,
-                guessSubmitted: false
+                guess: '',
+                timeRemaining: 60
             }
         }
         case CHANGE_TOKEN: {
@@ -69,6 +70,7 @@ export default function (state = initialState, action) {
             const { round } = action.payload;
             return {
                 ...state,
+                guessSubmitted: false,
                 round
             }
         }

@@ -67,7 +67,7 @@ class CurrentRound(Resource):
         if is_complete:
             current_round.write_round_data(current_game)
         song_id = current_round.song_id if '?' not in current_round.song_id else current_round.song_id.split('?')[0]
-        return {'songId': song_id, 'timestamp': current_round.timestamp}
+        return {'songId': song_id, 'timestamp': current_round.timestamp, 'correctAnswer': SB.correct_answer.title()}
 
 
 class RoundSummary(Resource):
